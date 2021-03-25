@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include "functions.h"
+#include <dirent.h>
+#include "commands.h"
 
 #define MAX_BUFFER 1024                        // max line buffer
 #define MAX_ARGS 64                            // max # args
@@ -38,7 +39,7 @@ int main (int argc, char ** argv)
             }
 
             else if (!strcmp(args[0],"quit"))   // "quit" command
-                break;                     // break out of 'while' loop
+                break;                          // break out of 'while' loop
 
             else if (!strcmp(args[0],"cd")) 
             {
@@ -62,7 +63,7 @@ int main (int argc, char ** argv)
 
             else if (!strcmp(args[0],"help")) 
             {
-                continue;
+                help();
             }
             
             else if (!strcmp(args[0],"pause")) 
@@ -70,12 +71,20 @@ int main (int argc, char ** argv)
                 pause_shell();
             }
 
+            else if (!strcmp(args[0],"pwd")) 
+            {
+                pwd(args);
+            }
+
+            else if (!strcmp(args[0],"more"))
+            {
+                more();
+            }
+
             else
             {
                 ext_commands(args);
             }
-
-
         }
     }
 return 0;
