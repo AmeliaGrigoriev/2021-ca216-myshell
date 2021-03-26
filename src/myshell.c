@@ -18,6 +18,7 @@ In submitting this project, I declare that the project material, which I now sub
 #define MAX_ARGS 64                            // max # args
 #define SEPARATORS " \t\n"                     // token sparators
 
+//used https://ca216.computing.dcu.ie/labs/lab4b/ 
 int main (int argc, char ** argv)
 {
     char buf[MAX_BUFFER];                      // line buffer

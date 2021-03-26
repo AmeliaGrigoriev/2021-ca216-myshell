@@ -10,7 +10,7 @@ In submitting this project, I declare that the project material, which I now sub
 extern char **environ;
 
 //function for "environ" command
-void environment(char *argv[])
+void environment(char *argv[]) // used https://ca216.computing.dcu.ie/labs/lab4c/
 {
 	int i;
    	for (i = 0; environ[i] != NULL; i++)
