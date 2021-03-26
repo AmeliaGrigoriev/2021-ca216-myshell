@@ -1,3 +1,12 @@
+/*
+Student Name: Amelia Grigoriev
+Student Number: 19348241
+In submitting this project, I declare that the project material, which I now submit, is my own work. Any assistance received by way of borrowing from the work of others has been cited and acknowledged within the work. I make this declaration in the knowledge that a breach of the rules pertaining to project submission may carry serious consequences.
+*/
+
+#include <limits.h>
+#include <string.h>
+
 extern char **environ;
 
 void environment(char *argv[])
@@ -7,9 +16,16 @@ void environment(char *argv[])
       printf("%s\n",environ[i]);
 }
 
+void shell_environment(void)
+{
+    char cwd[PATH_MAX];
+    getcwd(cwd, sizeof(cwd));
+    setenv("SHELL", strcat(cwd, "/myshell"), 1);
+}
+
 void echo(char *argv[])
 {
-    for (int i = 1; argv[i]; i++)              // print args
+    for (int i = 1; argv[i]; i++)
         printf("%s ", argv[i]);
     printf("\n");
 }
@@ -28,7 +44,6 @@ void cd(char *argv[])
         chdir(argv[1]);
         getcwd(cwd, sizeof(cwd));
         setenv("PWD", cwd, 1);
-        printf("%s\n", cwd);
     }
 }
 
@@ -39,6 +54,7 @@ void dir() // used https://www.tutorialspoint.com/c-program-to-list-all-files-an
     if (dir == NULL){
         printf("no such file or directory" );
     }
+
     while ((files = readdir(dir)) != NULL)
     printf("%s\n", files->d_name);
     closedir(dir);
@@ -48,17 +64,6 @@ void pause_shell()
 {
     printf("To continue, press enter.\n");
     while(getchar() != '\n');
-}
-
-void help()
-{
-    printf("Here is a list of commands in myshell:\n");
-    printf("cd\nclr\nenviron\necho\nhelp\npause\nquit\nmore\n");
-}
-
-void more()
-{
-    /*****************************************/
 }
 
 void pwd(char *argv[])

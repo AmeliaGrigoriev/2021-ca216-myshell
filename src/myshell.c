@@ -1,3 +1,10 @@
+/*
+Student Name: Amelia Grigoriev
+Student Number: 19348241
+In submitting this project, I declare that the project material, which I now submit, is my own work. Any assistance received by way of borrowing from the work of others has been cited and acknowledged within the work. I make this declaration in the knowledge that a breach of the rules pertaining to project submission may carry serious consequences.
+*/
+
+//includes
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,8 +39,12 @@ int main (int argc, char ** argv)
             while ((*arg++ = strtok(NULL,SEPARATORS)));
             // last entry will be NULL if (args[0]) {                     // if there's anything there
 
+            if(args[0] == NULL)
+            {
+                continue;
+            }
             /* check for internal/external command */
-            if (!strcmp(args[0],"clr")) { // "clear" command
+            else if (!strcmp(args[0],"clr")) { // "clear" command
                 system("clear");
                 continue;
             }
@@ -53,6 +64,7 @@ int main (int argc, char ** argv)
 
             else if (!strcmp(args[0],"environ")) 
             {
+                shell_environment();
                 environment(args);
             }
 
@@ -63,7 +75,8 @@ int main (int argc, char ** argv)
 
             else if (!strcmp(args[0],"help")) 
             {
-                help();
+                system("more ../manual/readme.md");
+                continue;
             }
             
             else if (!strcmp(args[0],"pause")) 
@@ -74,11 +87,6 @@ int main (int argc, char ** argv)
             else if (!strcmp(args[0],"pwd")) 
             {
                 pwd(args);
-            }
-
-            else if (!strcmp(args[0],"more"))
-            {
-                more();
             }
 
             else
