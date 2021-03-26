@@ -9,20 +9,22 @@ In submitting this project, I declare that the project material, which I now sub
 
 extern char **environ;
 
+//function for "environ" command
 void environment(char *argv[])
 {
-   int i;
-   for (i = 0; environ[i] != NULL; i++)
-      printf("%s\n",environ[i]);
+	int i;
+   	for (i = 0; environ[i] != NULL; i++)
+	   printf("%s\n",environ[i]);
 }
 
 void shell_environment(void)
 {
     char cwd[PATH_MAX];
     getcwd(cwd, sizeof(cwd));
-    setenv("SHELL", strcat(cwd, "/myshell"), 1);
+    setenv("SHELL", strcat(cwd, "/myshell"), 1); //setting the shell env to myshell
 }
 
+//function for "echo" command
 void echo(char *argv[])
 {
     for (int i = 1; argv[i]; i++)
@@ -30,6 +32,7 @@ void echo(char *argv[])
     printf("\n");
 }
 
+//function for "cd" command
 void cd(char *argv[])
 {
     char cwd[100];
@@ -37,7 +40,7 @@ void cd(char *argv[])
 
     if(argv[1] == NULL)
     {
-        printf("%s\n", cwd);
+        printf("%s\n", cwd); //print current directory
     }
     else
     {
@@ -47,6 +50,7 @@ void cd(char *argv[])
     }
 }
 
+//function for "dir" command
 void dir() // used https://www.tutorialspoint.com/c-program-to-list-all-files-and-sub-directories-in-a-directory
 {
     struct dirent *files;
@@ -60,29 +64,32 @@ void dir() // used https://www.tutorialspoint.com/c-program-to-list-all-files-an
     closedir(dir);
 }
 
+//function for "pause" command
 void pause_shell()
 {
     printf("To continue, press enter.\n");
     while(getchar() != '\n');
 }
 
+//function for "pwd" command
 void pwd(char *argv[])
 {
     char cwd[100];
-    getcwd(cwd, sizeof(cwd));
-    printf("%s\n", cwd);
+    getcwd(cwd, sizeof(cwd)); 
+    printf("%s\n", cwd); //print current directory
 }
 
-int ext_commands(char **args)
+// external commands
+int ext_commands(char **args) //used https://brennan.io/2015/01/16/write-a-shell-in-c/
 {
-  pid_t pid, wpid;
-  int status;
+	pid_t pid, wpid;
+  	int status;
 
-  pid = fork();
-  if (pid == 0) {
+  	pid = fork();
+	if (pid == 0) {
     // Child process
     if (execvp(args[0], args) == -1) {
-      perror("myshell");
+    	perror("myshell");
     }
     exit(EXIT_FAILURE);
   } else if (pid < 0) {
@@ -91,8 +98,9 @@ int ext_commands(char **args)
   } else {
     // Parent process
     do {
-      wpid = waitpid(pid, &status, WUNTRACED);
-    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+      	wpid = waitpid(pid, &status, WUNTRACED);
+    } 
+	while (!WIFEXITED(status) && !WIFSIGNALED(status));
   }
 
   return 1;

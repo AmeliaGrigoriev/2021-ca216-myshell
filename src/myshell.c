@@ -13,6 +13,7 @@ In submitting this project, I declare that the project material, which I now sub
 #include <dirent.h>
 #include "commands.h"
 
+//defines
 #define MAX_BUFFER 1024                        // max line buffer
 #define MAX_ARGS 64                            // max # args
 #define SEPARATORS " \t\n"                     // token sparators
@@ -22,7 +23,7 @@ int main (int argc, char ** argv)
     char buf[MAX_BUFFER];                      // line buffer
     char * args[MAX_ARGS];                     // pointers to arg strings
     char ** arg;                               // working pointer thru args
-    char * prompt = "==> " ;                    // shell prompt
+    char * prompt = "==> " ;                   // shell prompt
 
 /* keep reading input until "quit" command or eof of redirected input */
 
@@ -52,47 +53,47 @@ int main (int argc, char ** argv)
             else if (!strcmp(args[0],"quit"))   // "quit" command
                 break;                          // break out of 'while' loop
 
-            else if (!strcmp(args[0],"cd")) 
+            else if (!strcmp(args[0],"cd")) // "cd" command
             {
-                cd(args);
+                cd(args); // call cd function
             }
 
-            else if (!strcmp(args[0],"dir")) 
+            else if (!strcmp(args[0],"dir")) // "dir" command
             {
-                dir();
+                dir(); // call dir function
             }
 
-            else if (!strcmp(args[0],"environ")) 
+            else if (!strcmp(args[0],"environ")) // "environ" command
             {
-                shell_environment();
-                environment(args);
+                shell_environment(); // call shell_environment function
+                environment(args); // call environment function
             }
 
-            else if (!strcmp(args[0],"echo")) 
+            else if (!strcmp(args[0],"echo")) // "echo" command
             {
-                echo(args);
+                echo(args); // call echo function
             }
 
-            else if (!strcmp(args[0],"help")) 
+            else if (!strcmp(args[0],"help")) // "help" command
             {
-                system("more ../manual/readme.md");
+                system("more ../manual/readme.md"); // manual
                 continue;
             }
             
-            else if (!strcmp(args[0],"pause")) 
+            else if (!strcmp(args[0],"pause")) // "pause" command
             {
-                pause_shell();
+                pause_shell(); // call pause_shell function
             }
 
-            else if (!strcmp(args[0],"pwd")) 
+            else if (!strcmp(args[0],"pwd")) // "pwd" command
             {
-                pwd(args);
+                pwd(args); // call pwd function
             }
 
             else
             {
-                ext_commands(args);
-            }
+                ext_commands(args); // call ext_commands function
+            } 
         }
     }
 return 0;
